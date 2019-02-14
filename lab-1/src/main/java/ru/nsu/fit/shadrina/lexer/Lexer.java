@@ -60,7 +60,7 @@ public class Lexer {
                     return new Lexeme(LexemeType.NUMBER, numberText.toString());
                 }
                 else if (current == -1) l.setLexemeType(LexemeType.EOF);
-                else throw new LexerException();
+                else throw new LexerException("Unknown symbol");
         }
         l.setText(text);
         current = reader.read();

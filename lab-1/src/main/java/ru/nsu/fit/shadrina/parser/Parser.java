@@ -3,6 +3,7 @@ package ru.nsu.fit.shadrina.parser;
 import org.apache.log4j.Logger;
 import ru.nsu.fit.shadrina.exceptions.LexerException;
 import ru.nsu.fit.shadrina.exceptions.ParserException;
+import ru.nsu.fit.shadrina.exceptions.ParserExceptionType;
 import ru.nsu.fit.shadrina.lexer.Lexeme;
 import ru.nsu.fit.shadrina.lexer.Lexer;
 
@@ -26,8 +27,8 @@ public class Parser {
 
     public int parse() throws LexerException, ParserException, IOException {
         int result = parseExpression();
-        if (lexer.getLexeme().getLexemeType() != EOF) {
-            throw new ParserException();
+        if (current.getLexemeType() != EOF) {
+            throw new ParserException(ParserExceptionType.NO_EOF);
         }
         return result;
     }
@@ -92,9 +93,9 @@ public class Parser {
                 current = lexer.getLexeme();
                 return temp;
             } else {
-                throw new ParserException();
+                throw new ParserException(ParserExceptionType.NO_CLOSING_BRACKET);
             }
         }
-        throw new ParserException();
+        throw new ParserException(ParserExceptionType.UNKNOWN_ATOM);
     }
 }

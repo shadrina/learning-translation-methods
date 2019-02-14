@@ -13,7 +13,7 @@ public class Main {
     private static final Logger log = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
-        String test = "((45) - 78)^(1 + 2 + 3))";
+        String test = "((45) - 78)^(1 + 2 + 3)";
         Parser parser = new Parser(new Lexer(new StringReader(test)));
         try {
             System.out.print(parser.parse());
