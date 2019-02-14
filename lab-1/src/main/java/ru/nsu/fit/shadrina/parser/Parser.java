@@ -12,7 +12,9 @@ import java.io.IOException;
 import static ru.nsu.fit.shadrina.lexer.LexemeType.*;
 
 public class Parser {
+
     private static final Logger log = Logger.getLogger(Parser.class);
+
     private Lexer lexer;
     private Lexeme current;
 

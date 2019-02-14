@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class Lexer {
+
     private static final Logger log = Logger.getLogger(Lexer.class);
+
     private Reader reader;
     private int current;
 

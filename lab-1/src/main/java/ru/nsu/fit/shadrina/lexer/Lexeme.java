@@ -1,6 +1,7 @@
 package ru.nsu.fit.shadrina.lexer;
 
 public class Lexeme {
+
     private LexemeType lexemeType;
     private String text;
 
