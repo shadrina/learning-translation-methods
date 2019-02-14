@@ -3,6 +3,7 @@ package ru.nsu.fit.shadrina.lexer;
 import com.sun.istack.internal.NotNull;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import ru.nsu.fit.shadrina.exceptions.LexerException;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -17,11 +18,11 @@ public class Lexer {
         try {
             this.current = reader.read();
         } catch (IOException e) {
-            log.info("Reader exception!");
+            log.error(e.getMessage());
         }
     }
 
-    public Lexeme getLexeme() throws Exception {
+    public Lexeme getLexeme() throws LexerException, IOException {
         while (Character.isWhitespace(current)) {
             this.current = reader.read();
         }
@@ -56,13 +57,10 @@ public class Lexer {
                         numberText.append((char)current);
                         current = reader.read();
                     }
-                    l.setLexemeType(LexemeType.NUMBER);
-                    l.setText(numberText.toString());
-                    return l;
+                    return new Lexeme(LexemeType.NUMBER, numberText.toString());
                 }
                 else if (current == -1) l.setLexemeType(LexemeType.EOF);
-                // TODO: throw LexerException()
-                else throw new Exception();
+                else throw new LexerException();
         }
         l.setText(text);
         current = reader.read();
