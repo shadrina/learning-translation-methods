@@ -7,7 +7,6 @@ import ru.nsu.fit.shadrina.sm.util.TransitionFunction;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class FiniteStateMachine {
     private static final Logger log = Logger.getLogger(FiniteStateMachine.class);
@@ -38,8 +37,8 @@ public class FiniteStateMachine {
         try {
             BufferedReader br = new BufferedReader(new FileReader(machineDescription));
 
-            log.info("Read finite states");
-            String line;
+            int maxNumber = Integer.parseInt(br.readLine());
+            log.info("Read finite states number " + maxNumber);
             Arrays.stream(br.readLine()
                     .split(" "))
                     .map(Integer::parseInt)
@@ -47,19 +46,16 @@ public class FiniteStateMachine {
                         State st = new State(finiteStateNumber, true);
                         states.add(st);
             });
+            log.info("Read finite states");
 
-            State maxNumberState = states.stream().max((o1, o2) -> {
-                if (o1.getNumber() == o2.getNumber()) return 0;
-                return o1.getNumber() < o2.getNumber() ? -1 : 1;
-            }).get();
-            for (int i = 1; i < maxNumberState.getNumber(); ++i) {
+            for (int i = 1; i <= maxNumber; ++i) {
                 final int stateNumber = i;
                 if (states.stream().noneMatch(state -> state.getNumber() == stateNumber)) {
                     states.add(new State(stateNumber));
                 }
             }
 
-            log.info("Read transition functions");
+            String line;
             while ((line = br.readLine()) != null) {
                 String[] splitted = line.split(" ");
                 int fromNumber = Integer.parseInt(splitted[0]);
@@ -72,6 +68,7 @@ public class FiniteStateMachine {
                 TransitionFunction tf = new TransitionFunction(from, to, transitionSymbol);
                 from.addTransitionFunction(tf);
             }
+            log.info("Read transition functions");
 
         } catch (FileNotFoundException e) {
             log.error("Machine description file cannot be found");
