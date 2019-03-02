@@ -35,10 +35,12 @@ public class FiniteStateMachine {
 
     private void readMachineConfiguration() {
         try {
+
             BufferedReader br = new BufferedReader(new FileReader(machineDescription));
 
             int maxNumber = Integer.parseInt(br.readLine());
             log.info("Read finite states number " + maxNumber);
+
             Arrays.stream(br.readLine()
                     .split(" "))
                     .map(Integer::parseInt)
