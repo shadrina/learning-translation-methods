@@ -2,7 +2,7 @@
 
 ## Lab 1
 Calculating simple expression language with the following grammar:
-```
+```antlr
 expr:
   term +- term +- ...
 ;
@@ -54,3 +54,5 @@ Input configuration example:
 5 b 5
 ```
 Example describes the following FSM:
+
+<img src=lab-2/doc/fsm-example.jpg width=400>
