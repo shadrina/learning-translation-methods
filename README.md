@@ -4,23 +4,24 @@
 Calculating simple expression language with the following grammar:
 ```antlr
 expr:
-  term +- term +- ...
+  (term (PLUS | MINUS))* term
 ;
   
 term:
-  factor */ factor */ ...
+  (factor (MULT | DIV))* factor
 ;
 
 factor:
-  power ^ factor | power
+  power POW factor 
+  | power
 ;
 
 power:
-  atom | -atom
+  atom | (MINUS atom)
 ;
 
 atom:
-  number | (expr)
+  NUMBER | (OPEN_BRACE expr CLOSE_BRACE)
 ;
 ```
 Test results with coverage can be found in `lab1/doc`.
