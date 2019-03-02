@@ -3,25 +3,27 @@
 ## Lab 1
 Calculating simple expression language with the following grammar:
 ```antlr
-expr:
-  (term (PLUS | MINUS))* term
+expr
+  : (term (PLUS | MINUS))* term
 ;
   
-term:
-  (factor (MULT | DIV))* factor
+term
+  : (factor (MULT | DIV))* factor
 ;
 
-factor:
-  power POW factor 
+factor
+  : power POW factor 
   | power
 ;
 
-power:
-  atom | (MINUS atom)
+power
+  : atom 
+  | MINUS atom
 ;
 
-atom:
-  NUMBER | (OPEN_BRACE expr CLOSE_BRACE)
+atom
+  : NUMBER 
+  | OPEN_BRACE expr CLOSE_BRACE
 ;
 ```
 Test results with coverage can be found in `lab1/doc`.
