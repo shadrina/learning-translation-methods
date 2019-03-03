@@ -1,7 +1,6 @@
 package ru.nsu.fit.shadrina.lexer;
 
 import com.sun.istack.internal.NotNull;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import ru.nsu.fit.shadrina.exceptions.LexerException;
 
@@ -29,33 +28,33 @@ public class Lexer {
             this.current = reader.read();
         }
         Lexeme l = new Lexeme();
-        String text = String.valueOf((char)current);
-        switch (text) {
-            case "+":
+        char symbol = (char)current;
+        switch (symbol) {
+            case '+':
                 l.setLexemeType(LexemeType.PLUS);
                 break;
-            case "-":
+            case '-':
                 l.setLexemeType(LexemeType.MINUS);
                 break;
-            case "*":
+            case '*':
                 l.setLexemeType(LexemeType.MULT);
                 break;
-            case "/":
+            case '/':
                 l.setLexemeType(LexemeType.DIV);
                 break;
-            case "^":
+            case '^':
                 l.setLexemeType(LexemeType.POWER);
                 break;
-            case "(":
+            case '(':
                 l.setLexemeType(LexemeType.OPEN_BRACE);
                 break;
-            case ")":
+            case ')':
                 l.setLexemeType(LexemeType.CLOSE_BRACE);
                 break;
             default:
-                if (StringUtils.isNumeric(text)) {
+                if (Character.isDigit(symbol)) {
                     StringBuilder numberText = new StringBuilder("");
-                    while (StringUtils.isNumeric(String.valueOf((char)current))) {
+                    while (Character.isDigit((char)current)) {
                         numberText.append((char)current);
                         current = reader.read();
                     }
@@ -64,7 +63,7 @@ public class Lexer {
                 else if (current == -1) l.setLexemeType(LexemeType.EOF);
                 else throw new LexerException("Unknown symbol");
         }
-        l.setText(text);
+        l.setText(Character.toString(symbol));
         current = reader.read();
         return l;
     }
