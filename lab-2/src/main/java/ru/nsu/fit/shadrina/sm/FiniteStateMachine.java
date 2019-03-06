@@ -34,10 +34,7 @@ public class FiniteStateMachine {
     }
 
     private void readMachineConfiguration() {
-        try {
-
-            BufferedReader br = new BufferedReader(new FileReader(machineDescription));
-
+        try (BufferedReader br = new BufferedReader(new FileReader(machineDescription))) {
             int maxNumber = Integer.parseInt(br.readLine());
             log.info("Read finite states number " + maxNumber);
 
@@ -81,8 +78,7 @@ public class FiniteStateMachine {
     }
 
     private void readTargetFile() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fileToParse));
+        try (BufferedReader br = new BufferedReader(new FileReader(fileToParse))) {
             stringToParse = br.readLine().toCharArray();
         } catch (FileNotFoundException e) {
             log.error("Target string file cannot be found");
