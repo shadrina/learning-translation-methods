@@ -24,7 +24,7 @@ public class FiniteStateMachine {
     public boolean parse() {
         readMachineConfiguration();
         readTargetFile();
-        State currentState = states.stream().filter(state -> state.getNumber() == 1).findFirst().get();;
+        State currentState = states.stream().filter(state -> state.getNumber() == 1).findFirst().get();
         for (char symbol: stringToParse) {
             List<TransitionFunction> tfs = currentState.getTransitionFunctions();
             TransitionFunction tf = tfs.stream().filter(f -> f.getTransitionSymbol() == symbol).findFirst().get();
