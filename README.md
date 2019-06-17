@@ -59,3 +59,6 @@ Input configuration example:
 Example describes the following FSM:
 
 <img src=lab-2/doc/fsm-example.jpg width=400>
+
+## Lab 3
+Construction of a **nondeterministic** finite state machine according to a given configuration and line recognition.
